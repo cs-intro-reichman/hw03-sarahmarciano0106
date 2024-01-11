@@ -18,18 +18,37 @@ public class Calendar1 {
 	    // Prints each date dd/mm/yyyy in a separate line. If the day is a Sunday, prints "Sunday".
 	    // The following variable, used for debugging purposes, counts how many days were advanced so far.
 	    int debugDaysCounter = 0; 
+	    int sunday = 0; 
+
 	    //// Write the necessary initialization code, and replace the condition
 	    //// of the while loop with the necessary condition 
-	 	while (true) {
+	  
+	 	while (debugDaysCounter <= 35600) {
 	 		//// Write the body of the while 		
-	 		advance();
+	 		if (dayOfWeek == 1) {
+	 		
+	 		System.out.println(dayOfMonth + "/" + month + "/" + year + " Sunday"); 
+	 	}
+
+	 	else {
+	 		System.out.println(dayOfMonth + "/" + month + "/" + year); 
+	 	}
+		if ((dayOfMonth == 1)&& (dayOfWeek == 1)){
+	 			
+	 				sunday ++; 
+	 				
+	 			}
+		advance();
 	 		debugDaysCounter++;
+	 			
+
+	 		}
 	 		//// If you want to stop the loop after n days, replace the condition of the
 	 		//// if statement with the condition (debugDaysCounter == n)
-	 		if (false) { 
-	 			break;
-	 		}
-        }
+	 		//if (debugDaysCounter == 20 ) { 
+	 		//	break;
+	 	//	}
+        //}
 	 	//// Write the necessary ending code here
 	 }
 	
@@ -37,12 +56,30 @@ public class Calendar1 {
 	 // If the month changes, sets the number of days in this month.
 	 // Side effects: changes the static variables dayOfMonth, month, year, dayOfWeek, nDaysInMonth.
 	 private static void advance() {
+	 	dayOfMonth++;
+	 	dayOfWeek ++; 
+	 	if (dayOfWeek > 7){
+	 		dayOfWeek = 1; 
+	 	}
+	 	if (dayOfMonth > nDaysInMonth(month, year)){
+	 		month ++; 
+	 		dayOfMonth = 1; 
+	 		if (month > 12){
+	 			year ++;
+	 			month = 1;  
+	 		}
+	 	}
+	 	
 		// Replace this comment with your code
 	 } 
 		 
     // Returns true if the given year is a leap year, false otherwise.
 	private static boolean isLeapYear(int year) {
 	    // Replace the following statement with your code
+	    if ((year%4 == 0 && year%100!= 0) || (year % 400 == 0)) {
+            return true;
+        }
+       
 		return false;
 	}
 	 
@@ -52,6 +89,19 @@ public class Calendar1 {
 	// All the other months have 31 days.
 	private static int nDaysInMonth(int month, int year) {
 		// Replace the following statement with your code
-		return 0;
+		if ((month == 4) || (month == 6) || (month == 11)||(month == 9) ){
+
+           return 30;
+        }
+        else if (month == 2) {
+            if (isLeapYear(year)) {
+                return 29;
+            }
+            else {
+                return 28;
+            }
+		}
+        return 31;
+		
 	}
 }

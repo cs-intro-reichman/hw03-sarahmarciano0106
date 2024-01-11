@@ -1,97 +1,55 @@
-public class Calendar {    
-    static int dayOfMonth = 1;   
-    static int month = 1;
-    static int year = 1900;
-    static int dayOfWeek = 2;     
-    static int nDaysInMonth = 31; 
-    
-   
-    public static void main(String args[]) {
-        
-        int debugDaysCounter = 0; 
-        int givenyear = Integer.parseInt(args[0]);
+/*
+ * Checks if a given year is a leap year or a common year,
+ * and computes the number of days in a given month and a given year. 
+ */
+public class Calendar0 {	
+	
+	// Gets a year (command-line argument), and tests the functions isLeapYear and nDaysInMonth.
+	public static void main(String args[]) {
+		int year = Integer.parseInt(args[0]);
+		isLeapYearTest(year);
+		nDaysInMonthTest(year);
+	}
+		 
+	// Tests the isLeapYear function.
+	private static void isLeapYearTest(int year) {
+		String commonOrLeap = "common";
+		if (isLeapYear(year)) {
+			commonOrLeap = "leap";
+		}
+		System.out.println(year + " is a " + commonOrLeap + " year");  
+	}
 
+	// Tests the nDaysInMonth function.
+	private static void nDaysInMonthTest(int year) {
+		// Replace this comment with your code
+		for(int i = 1; i <= 12; i++){
+			nDaysInMonth(i, year);
+			System.out.println("Month " + i + " has " + nDaysInMonth(i, year) + " days");
+		}
+	}
 
-        
-        while (year < givenyear) {      
-            
-            advance();
-            debugDaysCounter++;
-               
-
-            } 
-             int stop = ()
-            if (debugDaysCounter == 20 ) { 
-                break;
-            }
-        
-        while (year == givenyear) {       
-            if (dayOfWeek == 1) {
-            
-                System.out.println(dayOfMonth + "/" + month + "/" + year + " Sunday"); 
-            }
-    
-            else {
-                System.out.println(dayOfMonth + "/" + month + "/" + year); 
-            }
-            
-            advance();
-            debugDaysCounter++;
-               
-
-        }
-            
-             int stop = ()
-            if (debugDaysCounter == 20 ) { 
-                break;
-            }  
-    }
-  
-    
-    
-     
-     private static void advance() {
-
-        dayOfMonth ++;
-        dayOfWeek ++; 
-        if (dayOfWeek > 7){
-            dayOfWeek = 1; 
-        }
-        if (dayOfMonth > nDaysInMonth(month, year)){
-            month ++; 
-            dayOfMonth = 1; 
-            if (month > 12){
-                year ++;
-                month = 1;  
-            }
-        }
-        
-        
-     } 
-         
-    private static boolean isLeapYear(int year) {
-        if ((year%4 == 0 && year%100!= 0) || (year % 400 == 0)) {
-            return true;
-        }
-       
-        return false;
-    }
-     
-    
-    private static int nDaysInMonth(int month, int year) {
-        if ((month == 4) || (month == 6) || (month == 11) || (month == 9)){
-
-           return 30;
-        }
-        else if (month == 2) {
-            if (isLeapYear(year)) {
-                return 29;
-            }
-            else {
-                return 28;
-            }
-        }    
-        return 31;
-    
-    }
+	// Returns true if the given year is a leap year, false otherwise.
+	public static boolean isLeapYear(int year) {
+	    // Replace the following statement with your code
+		boolean isLeap;
+		isLeap = ((year % 400) == 0);
+		isLeap = isLeap || (((year % 4) == 0) && ((year % 100) != 0));
+		return isLeap;
+	}
+	 
+	// Returns the number of days in the given month and year.
+	// April, June, September, and November have 30 days each.
+	// February has 28 days in a common year, and 29 days in a leap year.
+	// All the other months have 31 days.
+	public static int nDaysInMonth(int month, int year) {
+		// Replace the following statement with your code
+		if(month == 4 || month == 6 || month == 9 || month ==11) return 30;
+		if(month == 1 || month == 3 || month == 4 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) return 31;
+		if(month == 2){
+			if(isLeapYear(year)) return 29;
+			else return 28;
+		}
+		else return 0;
+	}
 }
